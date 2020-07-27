@@ -27,6 +27,6 @@ public class QuizController {
 
     @PostMapping
     public ResponseEntity<Quiz> addQuiz(@RequestBody Quiz quiz){
-        
+        return null;
     }
 }
