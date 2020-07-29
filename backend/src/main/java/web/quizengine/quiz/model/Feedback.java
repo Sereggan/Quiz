@@ -1,10 +1,10 @@
 package web.quizengine.quiz.model;
 
-public class QuizSolution {
+public class Feedback {
     private final boolean success ;
     private final String feedback;
 
-    public QuizSolution(boolean success, String feedback) {
+    public Feedback(boolean success, String feedback) {
         this.success = success;
         this.feedback = feedback;
     }
