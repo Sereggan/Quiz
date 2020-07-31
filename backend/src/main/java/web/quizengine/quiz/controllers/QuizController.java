@@ -1,6 +1,5 @@
 package web.quizengine.quiz.controllers;
 
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -12,7 +11,6 @@ import web.quizengine.quiz.model.Quiz;
 import web.quizengine.quiz.services.QuizService;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.*;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -26,7 +24,6 @@ public class QuizController {
     public QuizController(QuizService quizService) {
         this.quizService = quizService;
     }
-
 
     @GetMapping
     public List<Quiz> getAllQuizzes() {
@@ -45,7 +42,7 @@ public class QuizController {
         return new ResponseEntity<>(quizService.save(quiz),HttpStatus.OK);
     }
 
-    @PostMapping(value = "/{id}/solve", consumes = "application/json; charset=utf-8")
+    @PostMapping(value = "/solve/{id}", consumes = "application/json; charset=utf-8")
     public  ResponseEntity<Object>  solveQuizJson(@PathVariable Long id,@RequestBody Answer answer){
         Optional<Quiz> quiz = quizService.findById(id);
 

@@ -1,6 +1,7 @@
 package web.quizengine.quiz.model;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 import lombok.*;
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class Quiz {
     @NotNull
     @Column
     String title;
+
     @NotNull
     @Column
     String text;
@@ -32,8 +34,9 @@ public class Quiz {
     @ElementCollection
     private List<String> options;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column
-    @Size(min=1)
+    @Size(min=1, max=2)
     @ElementCollection
     private List<Integer> answer;
 
