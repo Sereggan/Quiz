@@ -21,4 +21,4 @@ npm start
 ![alt text](API_screenshots/solve_quiz.png)  
   
   Осустствует проверка на "дурочка"  
-Todo: Авторизацию, возможность использования Hibernate, Paging
+Todo: Авторизацию, возможность использования Hibernate, Paging, Docker, Задеплоить
