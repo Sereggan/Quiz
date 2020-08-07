@@ -1,50 +1,56 @@
 package web.quizengine.quiz.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import web.quizengine.quiz.model.Quiz;
-import web.quizengine.quiz.repositories.QuizSDJpaRepository;
+import web.quizengine.quiz.repositories.QuizHibernateRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class QuizServiceImpl implements QuizService{
 
-    final
-    QuizSDJpaRepository quizSDJpaRepository;
+    // Если хотите Spring data Jpa
+//    final
+//    QuizSDJpaRepository repository;
+//
+//    public QuizServiceImpl(QuizSDJpaRepository quizSDJpaRepository) {
+//        this.repository = quizSDJpaRepository;
+//    }
 
-    public QuizServiceImpl(QuizSDJpaRepository quizSDJpaRepository) {
-        this.quizSDJpaRepository = quizSDJpaRepository;
+    final QuizHibernateRepository repository;
+
+    public QuizServiceImpl(QuizHibernateRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public List<Quiz> findAll() {
         List<Quiz> quizList = new ArrayList<>();
-        quizSDJpaRepository.findAll().forEach(quizList::add);
+        List<Quiz> list = new ArrayList<>();
+        list = repository.findAll();
+        list.forEach(quizList::add);
         return quizList;
     }
 
     @Override
     public Optional<Quiz> findById(Long aLong) {
-        return quizSDJpaRepository.findById(aLong);
+        return repository.findById(aLong);
     }
 
     @Override
     public Quiz save(Quiz object) {
-        return quizSDJpaRepository.save(object);
+        return repository.save(object);
     }
-
 
     @Override
     public void delete(Quiz object) {
-        quizSDJpaRepository.delete(object);
+        repository.delete(object);
     }
 
     @Override
     public void deleteById(Long aLong) {
-        quizSDJpaRepository.deleteById(aLong);
+        repository.deleteById(aLong);
     }
 }
