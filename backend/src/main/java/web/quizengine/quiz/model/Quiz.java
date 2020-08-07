@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Objects;
@@ -21,11 +22,11 @@ public class Quiz {
     @GeneratedValue
     private Long id;
 
-    @NotNull
+    @NotBlank
     @Column
     String title;
 
-    @NotNull
+    @NotBlank
     @Column
     String text;
 
@@ -53,5 +54,16 @@ public class Quiz {
     @Override
     public int hashCode() {
         return Objects.hash(getTitle(), getText(), getOptions());
+    }
+
+    @Override
+    public String toString() {
+        return "Quiz{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", text='" + text + '\'' +
+                ", options=" + options +
+                ", answer=" + answer +
+                '}';
     }
 }
