@@ -21,8 +21,7 @@ public class QuizController {
 
     @GetMapping
     public String homePage(Model model){
-        model.addAttribute("name", "Sergey");
-
+        model.addAttribute("message", "Sergey");
         return "home"; //view
     }
 

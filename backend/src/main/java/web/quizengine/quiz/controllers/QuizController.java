@@ -55,7 +55,6 @@ public class QuizController {
         }catch (NullPointerException e){
             return new ResponseEntity<>("Answer can't be null)", HttpStatus.BAD_REQUEST);
         }
-
     }
 
     @DeleteMapping("{id}")
@@ -70,7 +69,7 @@ public class QuizController {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)  // Handling @Valid errors
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(
+    public Map<String, String> hanleValidationExceptions(
             MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
