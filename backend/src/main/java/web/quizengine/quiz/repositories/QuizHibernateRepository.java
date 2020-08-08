@@ -21,7 +21,7 @@ public class QuizHibernateRepository {
     }
 
     public Optional<Quiz> findById(Long id){
-        Optional<Quiz> quiz =  Optional.of(em.find(Quiz.class,id));
+        Optional<Quiz> quiz =  Optional.ofNullable(em.find(Quiz.class,id));
         return quiz;
     }
 
@@ -29,7 +29,6 @@ public class QuizHibernateRepository {
          em.persist(quiz);
          return quiz;
     }
-
 
     public void delete(Quiz quiz){
         em.remove(quiz);
