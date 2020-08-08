@@ -1,4 +1,6 @@
 package com.nikolaychuk.quizapp.model;
 
-public class Question {
+
+
+public class Quiz {
 }
