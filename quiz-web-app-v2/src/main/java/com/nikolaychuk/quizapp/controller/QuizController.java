@@ -1,5 +1,7 @@
 package com.nikolaychuk.quizapp.controller;
 
+import com.nikolaychuk.quizapp.service.QuizService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,14 @@ import java.util.Map;
 @Controller
 @RequestMapping("/")
 public class QuizController {
+
+
+    final
+    QuizService service;
+
+    public QuizController(QuizService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public String homePage(Model model){

@@ -14,7 +14,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.nikolaychuk.quizapp.controller")
+@ComponentScan(basePackages = "com.nikolaychuk.quizapp")
 public class AppConfig implements WebMvcConfigurer {
 
     @Autowired
