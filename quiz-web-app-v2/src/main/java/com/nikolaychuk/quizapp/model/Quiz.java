@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,11 +23,17 @@ public class Quiz {
 
     @NotBlank
     @Column
-    String title;
+    String description;
 
     @NotBlank
     @Column
     String text;
 
-//    private List<Integer> answer;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Answer> answers = new ArrayList<>();
+
+    @Column
+    @Size(min = 2,max = 4)
+    @ElementCollection
+    private List<String> options;
 }
