@@ -29,7 +29,7 @@ public class Quiz {
     @Column
     String text;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "quiz",fetch = FetchType.LAZY, cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Answer> answers = new ArrayList<>();
 
     @Column

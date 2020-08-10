@@ -14,4 +14,8 @@ public class Answer {
     @NotBlank
     @Column
     private Integer answer;
+
+    @ManyToOne
+    @JoinColumn(name="quiz_id",nullable = false)
+    private Quiz quiz;
 }
