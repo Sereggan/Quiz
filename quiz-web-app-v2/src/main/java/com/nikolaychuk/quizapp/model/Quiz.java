@@ -23,11 +23,11 @@ public class Quiz {
 
     @NotBlank
     @Column
-    String description;
+    String title;
 
     @NotBlank
     @Column
-    String text;
+    String description;
 
     @OneToMany(mappedBy = "quiz",fetch = FetchType.LAZY, cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Answer> answers = new ArrayList<>();
