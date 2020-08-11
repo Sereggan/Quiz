@@ -43,7 +43,7 @@ public class QuizController {
     }
 
     @PostMapping(value = "/solve/{id}", consumes = "application/json; charset=utf-8")
-    public  ResponseEntity<Object>  solveQuizJson(@PathVariable Long id,@RequestBody Answer answer){
+    public  ResponseEntity<Object>  solveQuiz(@PathVariable Long id,@RequestBody Answer answer){
         Optional<Quiz> quiz = quizService.findById(id);
 
         if(!quiz.isPresent()) return new ResponseEntity<>("Could not find quiz", HttpStatus.NOT_FOUND);
