@@ -36,4 +36,5 @@ public class Quiz {
     @Size(min = 2,max = 4)
     @ElementCollection
     private List<String> options;
+
 }
