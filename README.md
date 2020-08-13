@@ -21,5 +21,7 @@ npm start
 Решение квиза:  
 ![alt text](API_screenshots/solve_quiz.png)  
   
+   
+   Для backend есть тесты(Junit5 + Mockito)
   Осустствует проверка на "дурочка"  
 Todo: Авторизацию, Paging, Docker, Задеплоить
