@@ -16,6 +16,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @Setter
 @Getter
+@Builder
 public class Quiz {
     @Id
     @Column
@@ -25,6 +26,10 @@ public class Quiz {
     @NotBlank
     @Column
     String title;
+
+    public String getTitle() {
+        return title;
+    }
 
     @NotBlank
     @Column
