@@ -1,43 +1,73 @@
 package com.nikolaychuk.quizapp.controller;
 
-import com.nikolaychuk.quizapp.service.QuizService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
+import com.nikolaychuk.quizapp.model.*;
+import com.nikolaychuk.quizapp.service.QuizService;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.validation.Valid;
+import java.util.*;
 
-@Controller
-@RequestMapping("/")
+@CrossOrigin(origins = "http://localhost:3000")
+@RestController
+@RequestMapping("/api/quizzes")
 public class QuizController {
 
-
     final
-    QuizService service;
+    QuizService quizService;
 
-    public QuizController(QuizService service) {
-        this.service = service;
+    public QuizController(QuizService quizService) {
+        this.quizService = quizService;
     }
 
     @GetMapping
-    public String homePage(Model model){
-        model.addAttribute("message", "Sergey");
-        return "home"; //view
+    public List<Quiz> getAllQuizzes() {
+        List<Quiz> quizzes = new ArrayList<>(quizService.findAll());
+        return quizzes;
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)  // Handling request errors
+    @GetMapping("{id}")
+    public ResponseEntity<Object> getQuizById(@PathVariable Long id){
+        Optional<Quiz> quiz = quizService.findById(id);
+        return quiz.<ResponseEntity<Object>>map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>("Could not find quiz", HttpStatus.NOT_FOUND));
+    }
+
+    @PostMapping(consumes = "application/json; charset=utf-8")
+    public ResponseEntity<Object> addQuiz(@Valid @RequestBody Quiz quiz){
+        return new ResponseEntity<>(quizService.save(quiz),HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/solve/{id}", consumes = "application/json; charset=utf-8")
+    public  ResponseEntity<Object>  solveQuizJson(@PathVariable Long id,@RequestBody Answer answer){
+        Optional<Quiz> quiz = quizService.findById(id);
+
+        if(!quiz.isPresent()) return new ResponseEntity<>("Could not find quiz", HttpStatus.NOT_FOUND);
+        try {
+            if(answer.getAnswer().equals(quiz.get().getAnswer())){
+                return new ResponseEntity<>(new Feedback(true,"Congratulations, you're right!"),HttpStatus.OK);
+            }else  return new ResponseEntity<>(new Feedback(false,"You are wrong, Try again!"),HttpStatus.OK);
+
+        }catch (NullPointerException e){
+            return new ResponseEntity<>("Answer can't be null)", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Object> deleteById(@PathVariable Long id) {
+        Optional<Quiz> quiz = quizService.findById(id);
+        if(!quiz.isPresent()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        quizService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)  // Handling @Valid errors
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(
+    public Map<String, String> hanleValidationExceptions(
             MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
