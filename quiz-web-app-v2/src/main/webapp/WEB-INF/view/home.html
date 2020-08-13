@@ -4,6 +4,9 @@
     <title>Home page</title>
 </head>
 <body>
-<p th:text="${message}"></p>
+<tr th:each="quiz : ${quizzes}">
+    <td><span th:text="${quiz.title}"> Title </span></td>
+    <td><span th:text="${quiz.options}"> Author </span></td>
+</tr>
 </body>
 </html>
