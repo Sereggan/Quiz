@@ -6,6 +6,7 @@ import com.sun.istack.NotNull;
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Objects;
@@ -18,31 +19,29 @@ import java.util.Objects;
 @Getter
 @Builder
 public class Quiz {
+
     @Id
     @Column
     @GeneratedValue
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "Title cant be empty")
     @Column
     String title;
 
-    public String getTitle() {
-        return title;
-    }
-
-    @NotBlank
+    @NotBlank(message = "Text cant be empty")
     @Column
     String text;
 
     @Column
-    @Size(min = 2,max = 4)
+    @NotEmpty(message = "Options can't be empty")
+    @NotNull
     @ElementCollection
     private List<String> options;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column
-    @Size(min=1, max=2)
+    @NotEmpty(message = "Answer cant be empty!")
     @ElementCollection
     private List<Integer> answer;
 
