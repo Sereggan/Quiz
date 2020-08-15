@@ -25,7 +25,7 @@ public class QuizController {
     }
 
     @GetMapping
-    public String getAllQuizzes(Model model) {
+    public String showQuizList(Model model) {
         model.addAttribute("quizzes",quizService.findAll());
 
         return "home";
