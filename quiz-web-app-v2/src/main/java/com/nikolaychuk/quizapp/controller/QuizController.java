@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -27,13 +28,22 @@ public class QuizController {
     @GetMapping
     public String showQuizList(Model model) {
         model.addAttribute("quizzes",quizService.findAll());
-
         return "home";
     }
 
-    @PostMapping(consumes = "application/json; charset=utf-8")
-    public ResponseEntity<Object> addQuiz(@Valid @RequestBody Quiz quiz){
-        return new ResponseEntity<>(quizService.save(quiz),HttpStatus.OK);
+    @GetMapping("/add-quiz-page")
+    public String addQuizPage(Model model){
+        return "add-quiz";
+    }
+
+    @PostMapping(consumes = "application/json")
+    public String addQuiz(@Valid @RequestBody Quiz quiz, BindingResult result, Model model){
+        if(result.hasErrors()){
+            return "add-quiz";
+        }
+
+        quizService.save(quiz);
+        return "redirect:quizzes";
     }
 
     @PostMapping(value = "/solve/{id}", consumes = "application/json; charset=utf-8")
@@ -73,4 +83,11 @@ public class QuizController {
         });
         return errors;
     }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @RequestMapping("/404")
+    public String handleResourceNotFoundException() {
+        return "error/notfound";
+    }
+
 }
