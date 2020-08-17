@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -11,6 +11,41 @@
     <!-- <link rel="stylesheet" href="../css/shards.min.css"> -->
 </head>
 <body>
-Add quiz page
+
+<div class="container my-5">
+    <a href="/quizzes" class="center btn btn-primary">Home</a>
+    <h3> Add Quiz</h3>
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-10">
+                <form action="#" th:action="@{/quizzes}" th:object="${quiz}" method="post">
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label for="title" class="col-form-label">Title</label> <input type="text" th:field="*{title}" class="form-control" id="title" placeholder="Title"> <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="description" class="col-form-label">Description</label> <input type="text" th:field="*{description}" class="form-control" id="description" placeholder="Description"> <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-8">
+                            <label for="options" class="col-form-label">Options</label> <input type="text" th:field="*{options}" class="form-control" id="options" placeholder="Options"> <span th:if="${#fields.hasErrors('options')}" th:errors="*{options}" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-8">
+                            <label for="answer" class="col-form-label">Answer</label> <input type="text" th:field="*{answer}" class="form-control" id="answer" placeholder="Answer"> <span th:if="${#fields.hasErrors('answer')}" th:errors="*{answer}" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="submit" class="btn btn-primary" value="Add Quiz">
+                        </div>
+
+                        <div class="form-group col-md-8"></div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+
 </html>
