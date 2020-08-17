@@ -1,6 +1,6 @@
 # Quiz
 Quiz app  
-quiz-web-app-v2 это монолитное приложение на spring без бута(с Spring data(h2 database)), а backend - Spring boot REST APi(с возможностью выбора между Spring data/Hibernate), так же сделал frontend на React  
+quiz-web-app-v3 это монолитное приложение на spring(с Spring data(h2 database)), а backend - Spring boot REST APi(с возможностью выбора между Spring data/Hibernate), так же сделал frontend на React  
 Для запуска frontend необходимо прописать в консоль  
 cd ./frontend  
 npm start  
