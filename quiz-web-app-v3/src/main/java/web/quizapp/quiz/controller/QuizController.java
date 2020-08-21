@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import web.quizapp.quiz.model.Quiz;
 import web.quizapp.quiz.service.QuizService;
 
+import javax.swing.text.html.Option;
 import javax.validation.Valid;
 import java.util.*;
 
@@ -39,12 +40,40 @@ public class QuizController {
         if (result.hasErrors()) {
             return "add-quiz";
         }
-
+        quiz.setAnswer(quiz.getAnswer().toLowerCase());
         quizService.save(quiz);
         return "redirect:";
     }
 
+    @GetMapping("/solve-quiz-page/{id}")
+    public String showSolveQuizPage(@PathVariable("id") long id, Model model) {
+        Quiz quiz = quizService.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("Invalid quiz Id:" + id));
+        model.addAttribute("quiz", quiz);
+        model.addAttribute("wrongAnswer",false);
+        return "solve-quiz";
+    }
 
+    @PostMapping("solve/{id}")
+    public String updateStudent(@PathVariable("id") long id,
+                                Model model, @RequestParam(value = "answer",required = false) String answer) {
+        String correctAnswer = quizService.findById(id).get().getAnswer();
+        if(Objects.equals(correctAnswer,answer.toLowerCase())){
+            return "right-answer";
+        }
+        model.addAttribute("quiz", quizService.findById(id).get());
+        model.addAttribute("wrongAnswer",true);
+        return "solve-quiz";
+    }
+
+    @GetMapping("delete/{id}")
+    public String deleteStudent(@PathVariable("id") long id, Model model) {
+        Quiz quiz = quizService.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("Invalid quiz Id:" + id));
+        quizService.delete(quiz);
+        model.addAttribute("quizzes", quizService.findAll());
+        return "index";
+    }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)  // Handling @Valid errors
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -58,11 +87,4 @@ public class QuizController {
         });
         return errors;
     }
-
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @RequestMapping("/404")
-    public String handleResourceNotFoundException() {
-        return "error/notfound";
-    }
-
 }
