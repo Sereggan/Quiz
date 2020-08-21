@@ -5,7 +5,6 @@ backend - Spring boot REST APi(с возможностью выбора межд
 Целью было написать бекенд-часть на Java с использованием Java(Spring boot,Spring MVC, Spring data, PostgreSQL)  
 Сам по себе сервис представляет набор задач(Квизов) и возможность их решения, удаления и добавления  
 Пример использования API приведен на скринах ниже:  
-quiz-web-app-v3 это монолитное приложение на Spring boot с использованием MongoDB/H2
 Получение всех квизов:  
 ![alt text](API_screenshots/get_All_quizzes.png)  
 Получение одного квиза по ид:  
@@ -19,7 +18,14 @@ quiz-web-app-v3 это монолитное приложение на Spring boo
 Решение квиза:  
 ![alt text](API_screenshots/solve_quiz.png)  
   
+quiz-web-app-v3 это монолитное приложение на Spring boot с использованием MongoDB/H2, ответ регистроустойчив
+Скриншоты ниже:  
+Список квизов:  
+![alt text](API_screenshots/list_of_quizzes.png)  
+Правильный ответ на квиз:  
+![alt text](API_screenshots/correct_solution.png)  
+Неправильный ответ на квиз:  
+![alt text](API_screenshots/incorrect_solution.png)
   
-Для backend есть тесты(Junit5 + Mockito)  
 Осустствует проверка на "дурочка"  
-Todo: Paging, Docker, Задеплоить
+Todo: Paging, Docke...
