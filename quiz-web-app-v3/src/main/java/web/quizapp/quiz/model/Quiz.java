@@ -32,9 +32,4 @@ public class Quiz {
     @NotEmpty(message = "Answer can't be empty")
     @Column
     String answer;
-
-    @NotEmpty(message = "Options can't be empty")
-    @Column
-    @ElementCollection
-    private List<String> options;
 }
