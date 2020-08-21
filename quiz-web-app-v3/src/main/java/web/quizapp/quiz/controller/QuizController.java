@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import web.quizapp.quiz.model.Quiz;
 import web.quizapp.quiz.service.QuizService;
 
-import javax.swing.text.html.Option;
 import javax.validation.Valid;
 import java.util.*;
 
