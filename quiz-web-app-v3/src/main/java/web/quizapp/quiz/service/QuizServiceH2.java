@@ -1,19 +1,19 @@
 package web.quizapp.quiz.service;
 
 import web.quizapp.quiz.model.Quiz;
-import web.quizapp.quiz.repository.QuizRepository;
+import web.quizapp.quiz.repository.QuizRepositoryH2;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class QuizServiceImpl implements QuizService{
+@Service("H2Database")
+public class QuizServiceH2 implements QuizService{
 
-    final QuizRepository repository;
+    final QuizRepositoryH2 repository;
 
-    public QuizServiceImpl(QuizRepository repository) {
+    public QuizServiceH2(QuizRepositoryH2 repository) {
         this.repository = repository;
     }
 
