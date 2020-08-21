@@ -1,5 +1,7 @@
 package web.quizapp.quiz.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +19,9 @@ import java.util.*;
 @RequestMapping("/quizzes")
 public class QuizController {
 
-    final
+    @Autowired
+    @Qualifier("H2Database")
     QuizService quizService;
-
-    public QuizController(QuizService quizService) {
-        this.quizService = quizService;
-    }
 
     @GetMapping
     public String showQuizList(Model model) {
