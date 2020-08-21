@@ -1,9 +1,7 @@
 # Quiz
 Quiz app  
-backend - Spring boot REST APi(с возможностью выбора между Spring data/Hibernate), так же сделал frontend на React  
-Для запуска frontend необходимо прописать в консоль  
-cd ./frontend  
-npm start  
+backend - Spring boot REST APi(с возможностью выбора между Spring data/Hibernate), так же сделал frontend на React(но там нет авторизации)  
+Есть 2 пользователя user:user admin:admin, юзер может только получать квиз и решать его, а админ так же может удалить и добавить   
 Целью было написать бекенд-часть на Java с использованием Java(Spring boot,Spring MVC, Spring data, PostgreSQL)  
 Сам по себе сервис представляет набор задач(Квизов) и возможность их решения, удаления и добавления  
 Пример использования API приведен на скринах ниже:  
@@ -24,4 +22,4 @@ npm start
   
 Для backend есть тесты(Junit5 + Mockito)  
 Осустствует проверка на "дурочка"  
-Todo: Авторизацию, Paging, Docker, Задеплоить
+Todo: Paging, Docker, Задеплоить
