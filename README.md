@@ -18,7 +18,7 @@ backend - Spring boot REST APi(с возможностью выбора межд
 Решение квиза:  
 ![alt text](API_screenshots/solve_quiz.png)  
   
-quiz-web-app-v3 это монолитное приложение на Spring boot с использованием MongoDB  
+quiz-web-app-v3 это монолитное приложение на Spring boot  
 Список квизов:  
 ![alt text](API_screenshots/list_of_quizzes.png)  
 Правильный ответ на квиз:  
